@@ -24,7 +24,8 @@ sslcontext.load_cert_chain(MYSERV_FULLCHAIN, MYSERV_PRIVKEY)
 class HSTSHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
-        self.send_header("Content-Security-Policy", "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'")
+        self.send_header("Content-Security-Policy", "default-src 'self'")
+        #self.send_header("Content-Security-Policy", "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'")
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "SAMEORIGIN")
         self.send_header("X-XSS-Protection", "1; mode=block")
