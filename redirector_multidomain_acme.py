@@ -34,7 +34,7 @@ class RedirectHandler(SimpleHTTPRequestHandler):
                 SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
-        if self.path.startswith("/.well-known"):
+        if self.path.startswith("/.well-known"):#only serve acme challenges
             SimpleHTTPRequestHandler.do_GET(self)
         else:
             my_host = "localhost"
