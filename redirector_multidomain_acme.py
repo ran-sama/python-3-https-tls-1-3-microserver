@@ -30,7 +30,7 @@ class RedirectHandler(SimpleHTTPRequestHandler):
                 SimpleHTTPRequestHandler.end_headers(self)
             if not_a_bot == False:
                 self.send_response(400)#disconnect on requests without hostname
-                self.send_header("Content-type", "text/plain")
+                self.send_header('Connection', 'close')
                 SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
@@ -49,7 +49,7 @@ class RedirectHandler(SimpleHTTPRequestHandler):
                 SimpleHTTPRequestHandler.end_headers(self)
             if not_a_bot == False:
                 self.send_response(400)#disconnect on requests without hostname
-                self.send_header("Content-type", "text/plain")
+                self.send_header('Connection', 'close')
                 SimpleHTTPRequestHandler.end_headers(self)
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
