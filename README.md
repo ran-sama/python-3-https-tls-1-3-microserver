@@ -1,5 +1,5 @@
-# python3-https-tls1-3-microserver
-Threaded python3 HTTPS+TLS1.3 server w/ CryptCheck & SSL Labs 100% A+ rating.
+# python-3-https-tls-1-3-microserver
+Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating.
 ```diff
 !~ QuickStart ~!
 ```
