@@ -13,19 +13,25 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 
 ## TLS1.3 fully supported on OpenSSL 1.1.1a and higher
 
-(Optional step for extra security) To disable the single AES128 cipher please edit your OpenSSL config:
+(Optional step for extra security) To disable the single AES128 cipher please edit your OpenSSL 3.x.x config:
 ```
 sudo nano /etc/ssl/openssl.cnf
 ```
 
-By adding this line at the very end:
+By editing this line near the very beginning:
 ```
 Ciphersuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 ```
 
 
-So it will look like this:
+And adding this section at the end of the file:
 ```
+[default_conf]
+ssl_conf = ssl_sect
+
+[ssl_sect]
+system_default = system_default_sect
+
 [system_default_sect]
 MinProtocol = TLSv1.2
 CipherString = DEFAULT@SECLEVEL=2
