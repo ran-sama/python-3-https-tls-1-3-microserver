@@ -6,8 +6,8 @@ from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 MYSERV_WORKDIR = "/media/kingdian/server_pub"
 #MYSERV_CLIENTCRT = "/home/ran/keys/client.pem"
-MYSERV_FULLCHAIN = "/home/ran/.acme.sh/example.noip.me_ecc/fullchain.cer"
-MYSERV_PRIVKEY = "/home/ran/.acme.sh/example.noip.me_ecc/example.noip.me.key"
+MYSERV_FULLCHAIN = "/home/ran/.acme.sh/example.com_ecc/fullchain.cer"
+MYSERV_PRIVKEY = "/home/ran/.acme.sh/example.com_ecc/example.com.key"
 
 global sslcontext
 sslcontext = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)
