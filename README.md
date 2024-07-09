@@ -83,7 +83,7 @@ MYSERV_ACMEWEBDIR = "/home/ran/.acmeweb"
 For this we will bring up the redirector with python3 and make sure port 80 is forwarded in your WAN.
 * Note: The redirector is only able to perform HTTP(301) redirects and answer GET and HEAD requests for the upcoming acme-challenge.
 
-For the letsencrypt acme-challenge to work you also need the DNS entry of example.noip.me pointing to your servers IP.
+For the letsencrypt acme-challenge to work you also need the DNS entry of example.com pointing to your servers IP.
 Make yourself familiar with [acme.sh](https://github.com/acmesh-official/acme.sh) first and download it:
 
 ```
@@ -92,22 +92,22 @@ chmod +x acme.sh
 ```
 We run a shell one-liner to issue a certificate request, make appropriate changes according to your MYSERV_ACMEWEBDIR:
 ```
-./acme.sh --issue -d example.noip.me --keylength ec-384 --accountkeylength 4096 -w /home/ran/.acmeweb --server letsencrypt --force
+./acme.sh --issue -d example.com --keylength ec-384 --accountkeylength 4096 -w /home/ran/.acmeweb --server letsencrypt --force
 ```
 We want an EC-384 key, be able to authenticate us in future with a letsencrypt account key of 4096 bits and do the challenge in in the MYSERV_ACMEWEBDIR which you edited.
 
 The acme.sh will inform you about the location where your key and fullchain files have been placed, like for the user "ran" it is:
 ```
-/home/ran/.acme.sh/example.noip.me_ecc/fullchain.cer
-/home/ran/.acme.sh/example.noip.me_ecc/example.noip.me.key
+/home/ran/.acme.sh/example.com_ecc/fullchain.cer
+/home/ran/.acme.sh/example.com_ecc/example.com.key
 ```
 
 Make appropriate changes to server.py since your username will differ, please ignore the commented line:
 ```
 MYSERV_WORKDIR = "/media/kingdian/server_pub"
 #MYSERV_CLIENTCRT = "/home/ran/keys/client.pem"
-MYSERV_FULLCHAIN = "/home/ran/.acme.sh/example.noip.me_ecc/fullchain.cer"
-MYSERV_PRIVKEY = "/home/ran/.acme.sh/example.noip.me_ecc/example.noip.me.key"
+MYSERV_FULLCHAIN = "/home/ran/.acme.sh/example.com_ecc/fullchain.cer"
+MYSERV_PRIVKEY = "/home/ran/.acme.sh/example.com_ecc/example.com.key"
 ```
 * Note: Client certificates will prevent everyone from accessing your server, thus we leave them deactivated.
 
@@ -117,7 +117,7 @@ If all is configured correctly, bringing up server.py with python3 will make it 
 
 To help you with this I provide an example:
 ```
-0 4 2 */2 * bash /home/ran/acme.sh --issue -d example.noip.me --keylength ec-384 --accountkeylength 4096 -w /home/ran/.acmeweb/ --server letsencrypt --force 1>/home/ran/acme_status.log 2>/home/ran/acme_error.log && sudo reboot
+0 4 2 */2 * bash /home/ran/acme.sh --issue -d example.com --keylength ec-384 --accountkeylength 4096 -w /home/ran/.acmeweb/ --server letsencrypt --force 1>/home/ran/acme_status.log 2>/home/ran/acme_error.log && sudo reboot
 ```
 Do notice a system reboot is forced at the end, if you don't want this you can just restart the python server itself.
 Please use a different day and time! I'm sure Let's entcrypt can handle the load to their servers, but randomize it a bit.
