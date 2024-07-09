@@ -47,7 +47,7 @@ Ciphersuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 
 This workaround is still required until either Python >3.7 or OpenSSL will fix the set_ciphers() function:
 ```
-https://docs.python.org/3.8/library/ssl.html#tls-1-3
+https://docs.python.org/3.13/library/ssl.html#tls-1-3
 https://www.openssl.org/docs/man3.3/man5/config.html
 https://www.openssl.org/docs/man3.3/man3/SSL_CONF_cmd.html
 ```
