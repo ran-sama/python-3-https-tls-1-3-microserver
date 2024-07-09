@@ -20,9 +20,12 @@ sudo nano /etc/ssl/openssl.cnf
 
 By editing this line near the very beginning:
 ```
-Ciphersuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+openssl_conf = openssl_init
 ```
-
+into
+```
+openssl_conf = default_conf
+```
 
 And adding this section at the end of the file:
 ```
