@@ -12,7 +12,7 @@ class RedirectHandler(SimpleHTTPRequestHandler):
             SimpleHTTPRequestHandler.do_GET(self)
         else:
             self.send_response(301)#redirect all other requests
-            self.send_header("Location", "https://example.noip.me/")
+            self.send_header("Location", "https://example.com/")
             SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
@@ -20,7 +20,7 @@ class RedirectHandler(SimpleHTTPRequestHandler):
             SimpleHTTPRequestHandler.do_GET(self)
         else:
             self.send_response(301)#redirect all other requests
-            self.send_header("Location", "https://example.noip.me/")
+            self.send_header("Location", "https://example.com/")
             SimpleHTTPRequestHandler.end_headers(self)
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
