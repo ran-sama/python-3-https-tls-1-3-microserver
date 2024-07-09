@@ -128,6 +128,17 @@ Every 2nd odd month:
 Every 2nd even month:
 [https://crontab.guru/#0_4_2_2-12/2_*](https://crontab.guru/#0_4_2_2-12/2_*)
 
+## I am a professional now, I want DNS CAA and wildcard certs!
+
+Cool, you might like IONOS or really any other company selling domains:
+```
+./acme.sh --issue --dns dns_ionos -d example.com -d *.example.com --keylength ec-384 -w /home/ran/.acmeweb/ --server letsencrypt --always-force-new-domain-key
+```
+Docs:
+```
+https://github.com/acmesh-official/acme.sh/blob/master/dnsapi/dns_ionos.sh
+```
+
 ## Automatic launching and cert renewal supported
 
 https://github.com/ran-sama/python3-cert-renewer  
