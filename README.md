@@ -18,32 +18,38 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 sudo nano /etc/ssl/openssl.cnf
 ```
 
-By editing this line near the very beginning:
+By adding an extra line near the beginning change:
 ```
-openssl_conf = openssl_init
+[openssl_init]
+# providers = provider_sect
 ```
 into
 ```
-openssl_conf = default_conf
+[openssl_init]
+ssl_conf = ssl_configuration
+# providers = provider_sect
 ```
 
-And adding this section at the end of the file:
+Afterward simpy add this section to the end of the file:
 ```
-[default_conf]
-ssl_conf = ssl_sect
+[ssl_configuration]
+system_default = tls_system_default
 
-[ssl_sect]
-system_default = system_default_sect
-
-[system_default_sect]
+[tls_system_default]
+# The command can be repeated with one instance setting a TLS bound and the other setting a DTLS bound
 MinProtocol = TLSv1.2
-CipherString = DEFAULT@SECLEVEL=2
+MinProtocol = DTLSv1.2
+# Sets the ciphersuite list for TLSv1.2
+CipherString = ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305
+# Sets the available ciphersuites for TLSv1.3
 Ciphersuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 ```
 
 This workaround is still required until either Python >3.7 or OpenSSL will fix the set_ciphers() function:
 ```
 https://docs.python.org/3.8/library/ssl.html#tls-1-3
+https://www.openssl.org/docs/man3.3/man5/config.html
+https://www.openssl.org/docs/man3.3/man3/SSL_CONF_cmd.html
 ```
 
 ## Setup instructions and guide
