@@ -17,7 +17,6 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 First of all, we can work with a copy and environment variables to keep the changes limited to single services:
 ```
 cp /etc/ssl/openssl.cnf /home/ran/pyopenssl.cnf
-nano /home/ran/pyopenssl.cnf
 ```
 Before we dive deeper, telling the server to use that copied config is as easy as adding one line to the unit file of your service:
 ```
@@ -30,6 +29,9 @@ Environment="OPENSSL_CONF=/home/ran/pyopenssl.cnf"
 ```
 To learn more about turning a Python program into a service you can check: ![systemd-service-examples](https://github.com/ran-sama/systemd-service-examples)  
 Returning to the actual changes in the config of the copied openssl config, we start by adding an extra line near the beginning change:
+```
+nano /home/ran/pyopenssl.cnf
+```
 ```
 [openssl_init]
 # providers = provider_sect
