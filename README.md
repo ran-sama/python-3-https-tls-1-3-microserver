@@ -13,12 +13,23 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 
 ## TLS1.3 fully supported and tested working on OpenSSL 3.0.13 and higher
 
-(Optional step for extra security) To disable the single AES128 cipher please edit your OpenSSL 3.x.x config:
+(Optional step for extra security) To disable the single AES128 cipher please edit your OpenSSL 3.x.x config.  
+First of all, we can work with a copy and environment variables to keep the changes limited to single services:
 ```
-sudo nano /etc/ssl/openssl.cnf
+cp /etc/ssl/openssl.cnf /home/ran/pyopenssl.cnf
+nano /home/ran/pyopenssl.cnf
 ```
-
-By adding an extra line near the beginning change:
+Before we dive deeper, telling the server to use that copied config is as easy as adding one line to the unit file of your service:
+```
+sudo systemctl edit --force --full fox1.service
+```
+And adding the env var in the Service section:
+```
+[Service]
+Environment="OPENSSL_CONF=/home/ran/pyopenssl.cnf"
+```
+To learn more about turning a Python program into a service you can check: ![alt text](https://github.com/ran-sama/systemd-service-examples)  
+Returning to the actual changes in the config of the copied openssl config, we start by adding an extra line near the beginning change:
 ```
 [openssl_init]
 # providers = provider_sect
