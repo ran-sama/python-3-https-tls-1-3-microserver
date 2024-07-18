@@ -44,7 +44,7 @@ ssl_conf = ssl_configuration
 # providers = provider_sect
 ```
 
-Afterward simpy add this section to the end of the file:
+Afterward simply add this section to the end of the file:
 ```
 [ssl_configuration]
 system_default = tls_system_default
