@@ -32,7 +32,7 @@ Returning to the actual changes in the config of the copied openssl config:
 ```
 nano /home/ran/pyopenssl.cnf
 ```
-Start by adding an extra line near the beginning change:
+Start by adding an extra line near the beginning to change:
 ```
 [openssl_init]
 # providers = provider_sect
