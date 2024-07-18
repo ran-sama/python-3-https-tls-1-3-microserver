@@ -28,10 +28,11 @@ And adding the env var in the Service section:
 Environment="OPENSSL_CONF=/home/ran/pyopenssl.cnf"
 ```
 To learn more about turning a Python program into a service you can check: ![systemd-service-examples](https://github.com/ran-sama/systemd-service-examples)  
-Returning to the actual changes in the config of the copied openssl config, we start by adding an extra line near the beginning change:
+Returning to the actual changes in the config of the copied openssl config:
 ```
 nano /home/ran/pyopenssl.cnf
 ```
+Start by adding an extra line near the beginning change:
 ```
 [openssl_init]
 # providers = provider_sect
