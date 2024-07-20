@@ -25,7 +25,7 @@ class HSTSHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
         self.send_header("Content-Security-Policy", "default-src 'self'")
-        #self.send_header("Content-Security-Policy", "default-src 'none'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'")
+        #self.send_header("Content-Security-Policy", "default-src 'none'; img-src 'self'; script-src 'self'; font-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'")
         self.send_header("X-Content-Type-Options", "nosniff")
         #self.send_header("X-Robots-Tag", "none")
         self.send_header("Permissions-Policy", "camera=(), microphone=()")
