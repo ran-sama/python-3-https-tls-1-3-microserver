@@ -25,11 +25,13 @@ class HSTSHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
         self.send_header("Content-Security-Policy", "default-src 'self'")
-        #self.send_header("Content-Security-Policy", "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'")
-        #self.send_header("X-Robots-Tag", "noindex")
+        #self.send_header("Content-Security-Policy", "default-src 'none'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("X-Frame-Options", "SAMEORIGIN")
-        self.send_header("X-XSS-Protection", "1; mode=block")
+        #self.send_header("X-Robots-Tag", "none")
+        self.send_header("Permissions-Policy", "camera=(), microphone=()")
+        self.send_header("Cross-Origin-Embedder-Policy", "unsafe-none")
+        self.send_header("Cross-Origin-Opener-Policy", "unsafe-none")
+        self.send_header("Cross-Origin-Resource-Policy", "cross-origin")
         self.send_header("Referrer-Policy", "no-referrer")
         SimpleHTTPRequestHandler.end_headers(self)
 
