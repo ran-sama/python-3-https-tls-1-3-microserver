@@ -33,7 +33,7 @@ def main():
         os.chdir(MYSERV_ACMEWEBDIR)#auto-change working directory
         SimpleHTTPRequestHandler.server_version = "nginx"#pretend to be nginx
         SimpleHTTPRequestHandler.sys_version = ""#empty version string
-        server = ThreadedHTTPServer(('', 80), RedirectHandler)
+        server = ThreadedHTTPServer(('0.0.0.0', 80), RedirectHandler)
         print("Starting server, use <Ctrl-C> to stop")
         server.serve_forever()
 
