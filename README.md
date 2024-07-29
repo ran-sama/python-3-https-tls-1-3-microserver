@@ -98,6 +98,8 @@ MYSERV_ACMEWEBDIR = "/home/ran/.acmeweb"
 For this we will bring up the redirector with python3 and make sure port 80 is forwarded in your WAN.
 * Note: The redirector is only able to perform HTTP(301) redirects and answer GET and HEAD requests for the upcoming acme-challenge.
 
+## Issuing a cert with acme.sh
+
 For the letsencrypt acme-challenge to work you also need the DNS entry of example.com pointing to your servers IP.
 Make yourself familiar with [acme.sh](https://github.com/acmesh-official/acme.sh) first and download it:
 
