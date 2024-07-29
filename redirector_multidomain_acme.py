@@ -16,7 +16,7 @@ def bot_redirector(received_host):
 class RedirectHandler(SimpleHTTPRequestHandler):
     def do_HEAD(self):
         if self.path.startswith("/.well-known"):#only serve acme challenges
-            SimpleHTTPRequestHandler.do_GET(self)
+            SimpleHTTPRequestHandler.do_HEAD(self)
         else:
             my_host = "localhost"
             my_path = "/"
@@ -27,10 +27,12 @@ class RedirectHandler(SimpleHTTPRequestHandler):
             if not_a_bot == True:
                 self.send_response(301)#redirect all other requests
                 self.send_header("Location", "https://" + received_host + my_path)
+                self.send_header("Content-Length", "0")
                 SimpleHTTPRequestHandler.end_headers(self)
             if not_a_bot == False:
                 self.send_response(400)#disconnect on requests without hostname
                 self.send_header('Connection', 'close')
+                self.send_header("Content-Length", "0")
                 SimpleHTTPRequestHandler.end_headers(self)
 
     def do_GET(self):
@@ -46,10 +48,12 @@ class RedirectHandler(SimpleHTTPRequestHandler):
             if not_a_bot == True:
                 self.send_response(301)#redirect all other requests
                 self.send_header("Location", "https://" + received_host + my_path)
+                self.send_header("Content-Length", "0")
                 SimpleHTTPRequestHandler.end_headers(self)
             if not_a_bot == False:
                 self.send_response(400)#disconnect on requests without hostname
                 self.send_header('Connection', 'close')
+                self.send_header("Content-Length", "0")
                 SimpleHTTPRequestHandler.end_headers(self)
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -58,8 +62,8 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 def main():
     try:
         os.chdir(MYSERV_ACMEWEBDIR)#auto-change working directory
-        SimpleHTTPRequestHandler.server_version = "https://github.com/ran-sama"#change to a message you want
-        SimpleHTTPRequestHandler.sys_version = "https://github.com/ran-sama"#change to a message you want
+        SimpleHTTPRequestHandler.server_version = "nginx"#pretend to be nginx
+        SimpleHTTPRequestHandler.sys_version = ""#empty version string
         server = ThreadedHTTPServer(('0.0.0.0', 80), RedirectHandler)
         print("Starting server, use <Ctrl-C> to stop")
         server.serve_forever()
