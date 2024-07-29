@@ -11,7 +11,7 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 ![alt text](https://raw.githubusercontent.com/ran-sama/python3_https_tls1_2_microserver/master/images/cryptcheck.png)
 ![alt text](https://raw.githubusercontent.com/ran-sama/python3_https_tls1_2_microserver/master/images/observatory_rating_new.png)
 
-## Optional step for an SSL Labs rating of A+ and 100% scores in all 4 categories
+## (Optional step) SSL Labs rating of A+ and 100% score in every category
 
 SSL Labs will mildly downgrade everyone using the single AES128 cipher in the TLS1.3 spec, however this is easy to avoid:
 For convenience we could directly edit the OpenSSL 3.x.x config, but it is more elegant to work on a copy and avoid making a system wide change.
