@@ -3,7 +3,7 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 ```diff
 !~ QuickStart ~!
 ```
-[Click for setup instructions and guide](https://github.com/ran-sama/python3-https-tls1-3-microserver#setup-instructions-and-guide)
+[Click for setup instructions and guide](https://github.com/ran-sama/python-3-https-tls-1-3-micro-server#setup-instructions-and-guide)
 ```diff
 !~ QuickStart ~!
 ```
