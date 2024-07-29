@@ -9,7 +9,7 @@ MYSERV_ACMEWEBDIR = "/home/ran/.acmeweb"
 class RedirectHandler(SimpleHTTPRequestHandler):
     def do_HEAD(self):
         if self.path.startswith("/.well-known"):#only serve acme challenges
-            SimpleHTTPRequestHandler.do_GET(self)
+            SimpleHTTPRequestHandler.do_HEAD(self)
         else:
             self.send_response(301)#redirect all other requests
             self.send_header("Location", "https://example.com/")
@@ -29,8 +29,8 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 def main():
     try:
         os.chdir(MYSERV_ACMEWEBDIR)#auto-change working directory
-        SimpleHTTPRequestHandler.server_version = "https://github.com/ran-sama"#change to a message you want
-        SimpleHTTPRequestHandler.sys_version = "https://github.com/ran-sama"#change to a message you want
+        SimpleHTTPRequestHandler.server_version = "nginx"#pretend to be nginx
+        SimpleHTTPRequestHandler.sys_version = ""#empty version string
         server = ThreadedHTTPServer(('', 80), RedirectHandler)
         print("Starting server, use <Ctrl-C> to stop")
         server.serve_forever()
