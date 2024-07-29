@@ -11,14 +11,15 @@ Threaded Python 3 HTTPS + TLS 1.3 server w/ CryptCheck & SSL Labs 100% A+ rating
 ![alt text](https://raw.githubusercontent.com/ran-sama/python3_https_tls1_2_microserver/master/images/cryptcheck.png)
 ![alt text](https://raw.githubusercontent.com/ran-sama/python3_https_tls1_2_microserver/master/images/observatory_rating_new.png)
 
-## TLS1.3 fully supported and tested working on OpenSSL 3.0.13 and higher
+## Optional step for an SSL Labs rating of A+ and (100/100/100/100) scores
 
-(Optional step for extra security) To disable the single AES128 cipher please edit your OpenSSL 3.x.x config.  
-First of all, we can work with a copy and environment variables to keep the changes limited to single services:
+SSL Labs will mildly downgrade everyone using the single AES128 cipher in the TLS1.3 spec, however this is easy to avoid:
+For convenience we could directly edit the OpenSSL 3.x.x config, but it is more elegant to work on a copy and avoid making a system wide change.
+The copy can be easily used by any program with the help of environment variables limited to the services where we want to use the copy:
 ```
 cp /etc/ssl/openssl.cnf /home/ran/pyopenssl.cnf
 ```
-Before we dive deeper, telling the server to use that copied config is as easy as adding one line to the unit file of your service:
+Before we dive deeper, allow me to illustrate how easy it is to define an environment variable for a single unit file:
 ```
 sudo systemctl edit --force --full fox1.service
 ```
@@ -27,7 +28,7 @@ And adding the env var in the Service section:
 [Service]
 Environment="OPENSSL_CONF=/home/ran/pyopenssl.cnf"
 ```
-To learn more about turning a Python program into a service you can check: ![systemd-service-examples](https://github.com/ran-sama/systemd-service-examples)  
+To learn more about turning any Python program into a real service you can check: ![systemd-service-examples](https://github.com/ran-sama/systemd-service-examples)  
 Returning to the actual changes in the config of the copied openssl config:
 ```
 nano /home/ran/pyopenssl.cnf
